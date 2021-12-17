@@ -1,22 +1,28 @@
-from requests_html import HTMLSession
-import numpy as np
-session = HTMLSession();
+import readcsv
+from GenerateCSVFromUrl import GenerateCSV, remove_specific_row_from_csv, csv_to_xlsx
+from readcsv import ReadCSVFile
+import openpyxl
+
 url = 'http://www.ohtashp.com/topics/takarakuji/'
-# 把对应的网页内容 取回来
-r = session.get(url)
-# 只看字符串
-#print(r.html.text)]
-# 查看绝对链接
-# print(r.html.absolute_links)
-# selector
-sel = 'body > div:nth-child(4) > div.table-responsive > table > tbody > tr:nth-child(1)'
-results = r.html.find(sel)
-print(type(results))
-print(results)
-print(results[0].text)
-#print(list(results[0].absolute_links)[0])
+csv_file_Name = 'kuji.csv'
+excel_file_Name = 'kuji.xlsx'
 
 
+GenerateCSV(url,csv_file_Name)
+kujiData = ReadCSVFile(csv_file_Name)
+#csv_to_xlsx(csv_file_Name,excel_file_Name,"2019-2021")
 
+print(kujiData[readcsv.key[0]])
 
-#print(results)
+# workbook
+# worksheet
+# row column cell
+wb= openpyxl.load_workbook(excel_file_Name)
+ws = wb.active
+print(wb.sheetnames)
+kuji_19_221 = wb.create_sheet('2019-2021')
+print(wb.sheetnames)
+
+#ws = wb.get_sheet_by_name('sheetTitle')
+
+#remove_specific_row_from_csv(fileName,'','')
