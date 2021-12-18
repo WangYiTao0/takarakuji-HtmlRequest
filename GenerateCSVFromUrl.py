@@ -16,7 +16,7 @@ def GenerateCSV(url,filename) :
     file = table.to_csv(originfilename, encoding='utf-8-sig', header=0, index=0)
     df = pd.read_csv(originfilename)
     #print(df)
-    df_new = df.drop([50,152,153,154,155,156,157])
+    df_new = df.drop([51,153,154,155,156,157,158])
     df_new.to_csv(filename)
 
 
